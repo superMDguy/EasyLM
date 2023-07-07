@@ -12,13 +12,14 @@ function _tpu_create {
     tpu_project=$2
     tpu_cores=$3
     tpu_name=$4
-    software_version='tpu-vm-base'
+    software_version='tpu-ubuntu2204-base'
     gcloud alpha compute tpus tpu-vm create \
         $tpu_name \
-        --accelerator-type="v3-$tpu_cores" \
+        --accelerator-type="v2-$tpu_cores" \
         --version $software_version \
         --zone $tpu_zone \
         --project $tpu_project
+        --preemptible
 }
 
 function _tpu_retry_create {
