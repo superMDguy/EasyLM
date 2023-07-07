@@ -42,7 +42,6 @@ FLAGS, FLAGS_DEF = mlxu.define_flags_with_default(
 
 
 def main(argv):
-    print('init', FLAGS.jax_distributed)
     JaxDistributedConfig.initialize(FLAGS.jax_distributed)
     set_random_seed(FLAGS.seed)
 

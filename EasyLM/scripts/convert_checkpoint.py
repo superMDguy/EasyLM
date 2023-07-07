@@ -9,6 +9,7 @@ import os
 import numpy as np
 import mlxu
 import jax.numpy as jnp
+import flax
 import flax.serialization
 from EasyLM.checkpoint import StreamingCheckpointer
 from EasyLM.jax_utils import float_to_dtype
@@ -34,8 +35,9 @@ def main(argv):
         )
     else:
         params = float_to_dtype(params, FLAGS.float_dtype)
-        with mlxu.open_file(FLAGS.output, 'wb') as fout:
-            fout.write(flax.serialization.msgpack_serialize(params, in_place=True))
+        flax.training.checkpoints.save_checkpoint(, params)
+        # with mlxu.open_file(FLAGS.output_file, 'wb') as fout:
+        # fout.write(flax.serialization.msgpack_serialize(params, in_place=True))
 
 
 if __name__ == "__main__":
